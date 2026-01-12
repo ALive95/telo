@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSVP - Lorenzo & Teresa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Goudy Old Style', 'Times New Roman', Times, serif;
+            line-height: 1.6;
+            background: #ffffff;
+            color: #000000;
+            min-height: 100vh;
+            margin-right: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .wedding-date {
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: #000000;
+            text-align: center;
+            padding-top: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .site-title {
+            display: block;
+            max-width: 400px;
+            height: auto;
+            margin: 0 auto;
+            padding-top: 2rem;
+            padding-bottom: 0.5rem;
+        }
+        
+        
+        nav {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: #ffffff;
+            color: #000000;
+            text-decoration: none;
+            border-radius: 0px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        nav a:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            background: #000000;
+            color: #ffffff;
+            }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 400;
+            color: #000000;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .search-section, .confirmation-section {
+            background: #ffffff;
+            padding: 3rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            font-family: 'Goudy Old Style', 'Times New Roman', Times, serif;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: 0px;
+        }
+
+        button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: #000000;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-family: 'Goudy Old Style', 'Times New Roman', Times, serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            background: #333333;
+        }
+
+        .error-message {
+            color: #c00;
+            margin-top: 1rem;
+            font-size: 1rem;
+        }
+
+        .guest-info {
+            background: #f9f9f9;
+            padding: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+        }
+
+        .guest-info p {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .guest-info strong {
+            font-weight: 600;
+        }
+
+        .family-member {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .family-member input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 1rem;
+            cursor: pointer;
+        }
+
+        .family-member input[type="checkbox"]:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .family-member.disabled {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .family-member.disabled label {
+            cursor: not-allowed;
+        }
+
+        .family-member label {
+            flex: 1;
+            font-size: 1.1rem;
+            font-weight: 400;
+            cursor: pointer;
+            margin: 0;
+        }
+
+        .member-details {
+            font-size: 0.9rem;
+            color: #666;
+            margin-left: 0.5rem;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .success-message {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #0a0;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="image_example.png" alt="Lorenzo & Teresa" class="site-title">
+        <p class="wedding-date">30 Maggio 2026 - Ravenna</p>
+
+         <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="wedding-day.html">Programma</a></li>
+                <li><a href="#registry">Registry</a></li>
+                <li><a href="rsvp-temp.html">RSVP</a></li>
+            </ul>
+        </nav>
+       
+        <h2>RSVP</h2>
+
+        <p style="text-align: center; margin-bottom: 0rem; font-size: 1.3rem; color: #151515;">
+            Qui puoi confermare o rifiutare la partecipazione tua e dei tuoi familiari 
+            per il ricevimento a Palazzo Manzoni. 
+        </p>
+        <p style="text-align: center; margin-bottom: 2rem; font-size: 1.3rem; color: #151515;">
+            La Messa al mattino è libera e non è richiesto confermare la partecipazione.
+        </p>
+
+        <!-- Search Section -->
+        <div class="search-section" id="searchSection">
+            <div class="form-group">
+                <label for="nameInput">Nome e Cognome:</label>
+                <input type="text" id="nameInput" placeholder="es. Mario Rossi">
+            </div>
+            <button onclick="searchGuest()">Cerca</button>
+            <p class="error-message hidden" id="errorMessage">Nome non trovato nella lista degli invitati.</p>
+        </div>
+
+        <!-- Confirmation Section -->
+        <div class="confirmation-section hidden" id="confirmationSection">
+            <div class="guest-info" id="guestInfo"></div>
+            <div class="button-group">
+                <button onclick="confirmAttendance()">Confermo la partecipazione</button>
+                <button onclick="declineAttendance()" style="background: #666;">Non potrò partecipare</button>
+            </div>
+            
+            <!-- Dietary Restrictions Section -->
+            <div class="hidden" id="dietarySection" style="margin-top: 2rem;">
+                <div class="form-group">
+                    <label for="dietaryInput">Restrizioni alimentari o allergie (opzionale):</label>
+                    <input type="text" id="dietaryInput" placeholder="es. vegetariano, allergia ai crostacei, celiaco">
+                </div>
+                <button onclick="submitWithDietary()">Invia</button>
+            </div>
+            
+            <p class="success-message hidden" id="successMessage"></p>
+        </div>
+    </div>
+
+    <script>
+        // Guest database - organized by families
+        // Each family member can RSVP individually
+        let guestDatabase = [
+            { name: 'Mario Rossi', family: 'Rossi', plusOne: 1 },
+            { name: 'Laura Rossi', family: 'Rossi', plusOne: 0 },
+            { name: 'Giuseppe Bianchi', family: 'Bianchi', plusOne: 0 },
+            { name: 'Anna Bianchi', family: 'Bianchi', plusOne: 0 },
+            { name: 'Marco Bianchi', family: 'Bianchi', plusOne: 0 },
+            { name: 'Luca Verdi', family: 'Verdi', plusOne: 2 },
+            // Add more guests here in this format:
+            // { name: 'Nome Cognome', family: 'Famiglia', plusOne: 0 },
+        ];
+        
+        let currentGuest = null;
+        let familyMembers = [];
+
+        console.log('Guest database loaded:', guestDatabase);
+
+        // Search for guest
+        function searchGuest() {
+            const input = document.getElementById('nameInput').value.trim();
+            const errorMsg = document.getElementById('errorMessage');
+            
+            console.log('Searching for:', input);
+            
+            if (!input) {
+                errorMsg.textContent = 'Inserisci nome e cognome.';
+                errorMsg.classList.remove('hidden');
+                return;
+            }
+
+            // Normalize input for comparison
+            const normalizedInput = input.toLowerCase().replace(/\s+/g, ' ');
+            console.log('Normalized input:', normalizedInput);
+            
+            // Search in database
+            currentGuest = guestDatabase.find(guest => {
+                const normalizedGuest = guest.name.toLowerCase().replace(/\s+/g, ' ');
+                console.log('Comparing with:', normalizedGuest);
+                return normalizedGuest === normalizedInput;
+            });
+
+            console.log('Found guest:', currentGuest);
+
+            if (currentGuest) {
+                // Find all family members
+                familyMembers = guestDatabase.filter(guest => 
+                    guest.family === currentGuest.family
+                );
+                console.log('Family members:', familyMembers);
+                showConfirmationSection();
+            } else {
+                errorMsg.textContent = 'Nome non trovato nella lista degli invitati.';
+                errorMsg.classList.remove('hidden');
+            }
+        }
+
+        // Show confirmation section
+        function showConfirmationSection() {
+            document.getElementById('searchSection').classList.add('hidden');
+            document.getElementById('confirmationSection').classList.remove('hidden');
+            document.getElementById('errorMessage').classList.add('hidden');
+
+            // Display family info and members
+            const guestInfo = document.getElementById('guestInfo');
+            let html = `<p><strong>Famiglia:</strong> ${currentGuest.family}</p>`;
+            html += `<p style="margin-top: 1.5rem; margin-bottom: 1rem;"><strong>Seleziona i partecipanti:</strong></p>`;
+            
+            // Create checkbox for each family member
+            familyMembers.forEach((member, index) => {
+                html += `
+                    <div class="family-member">
+                        <input type="checkbox" id="member${index}" value="${index}" onchange="togglePlusOneSelector(${index})">
+                        <label for="member${index}">
+                            ${member.name}
+                        </label>
+                    </div>
+                `;
+                
+                // Add plusOne selector if member has plusOnes
+                if (member.plusOne > 0) {
+                    html += `
+                        <div id="plusOneSelector${index}" class="family-member" style="display: none; margin-left: 2rem; background: #f0f0f0;">
+                            <label style="margin-right: 1rem;">Numero di accompagnatori:</label>
+                            <select id="plusOneCount${index}" style="padding: 0.5rem; font-size: 1rem; font-family: 'Goudy Old Style', 'Times New Roman', Times, serif;">
+                    `;
+                    for (let i = 0; i <= member.plusOne; i++) {
+                        html += `<option value="${i}">${i}</option>`;
+                    }
+                    html += `
+                            </select>
+                        </div>
+                    `;
+                }
+            });
+            
+            guestInfo.innerHTML = html;
+        }
+
+        // Toggle plusOne selector visibility
+        function togglePlusOneSelector(index) {
+            const checkbox = document.getElementById(`member${index}`);
+            const selector = document.getElementById(`plusOneSelector${index}`);
+            if (selector) {
+                selector.style.display = checkbox.checked ? 'flex' : 'none';
+            }
+        }
+
+        // Disable all checkboxes
+        function disableCheckboxes() {
+            familyMembers.forEach((member, index) => {
+                const checkbox = document.getElementById(`member${index}`);
+                if (checkbox) {
+                    checkbox.disabled = true;
+                    checkbox.parentElement.classList.add('disabled');
+                }
+                
+                // Disable plusOne selector if exists
+                const plusOneSelect = document.getElementById(`plusOneCount${index}`);
+                if (plusOneSelect) {
+                    plusOneSelect.disabled = true;
+                }
+            });
+            document.querySelector('.button-group').style.display = 'none';
+        }
+
+        // Confirm attendance - show dietary section
+        function confirmAttendance() {
+            const checkedMembers = getCheckedMembers();
+            
+            if (checkedMembers.length === 0) {
+                alert('Seleziona almeno un partecipante.');
+                return;
+            }
+            
+            // Hide buttons and show dietary section
+            document.querySelector('.button-group').style.display = 'none';
+            document.getElementById('dietarySection').classList.remove('hidden');
+            disableCheckboxes();
+        }
+
+        // Submit with dietary restrictions
+        function submitWithDietary() {
+            const checkedMembers = getCheckedMembers();
+            const dietary = document.getElementById('dietaryInput').value.trim();
+            
+            sendToGoogleSheets('Conferma', checkedMembers, dietary);
+        }
+
+        // Decline attendance
+        function declineAttendance() {
+            const checkedMembers = getCheckedMembers();
+            
+            if (checkedMembers.length === 0) {
+                alert('Seleziona le persone che non parteciperanno.');
+                return;
+            }
+            
+            disableCheckboxes();
+            sendToGoogleSheets('Declina', checkedMembers, '');
+        }
+
+        // Get checked family members including plusOnes
+        function getCheckedMembers() {
+            const checked = [];
+            familyMembers.forEach((member, index) => {
+                const checkbox = document.getElementById(`member${index}`);
+                if (checkbox && checkbox.checked) {
+                    checked.push(member);
+                    
+                    // Add plusOnes as separate entries
+                    const plusOneSelect = document.getElementById(`plusOneCount${index}`);
+                    if (plusOneSelect) {
+                        const plusOneCount = parseInt(plusOneSelect.value);
+                        for (let i = 1; i <= plusOneCount; i++) {
+                            checked.push({
+                                name: `${member.name} plusOne ${i}`,
+                                family: member.family,
+                                plusOne: 0
+                            });
+                        }
+                    }
+                }
+            });
+            return checked;
+        }
+
+        // Send response to Google Sheets
+        function sendToGoogleSheets(response, members, dietary) {
+            const successMsg = document.getElementById('successMessage');
+            
+            // Show loading message
+            successMsg.textContent = 'Registrando la scelta...';
+            successMsg.style.color = '#000';
+            successMsg.classList.remove('hidden');
+            
+            // Hide dietary section
+            document.getElementById('dietarySection').classList.add('hidden');
+            
+            // Replace this URL with your Google Apps Script web app URL
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzsMXGXUO-11YM34EvuFFIT8C3OLYt8HFi2V-0vmODWA8JAoaBMdyGvOEy5P3rIb9rE/exec'
+            
+            // Send each member's response
+            const promises = members.map(member => {
+                const data = {
+                    name: member.name,
+                    family: member.family,
+                    plusOne: member.plusOne,
+                    response: response,
+                    timestamp: new Date().toISOString(),
+                    dietary: dietary || ''
+                };
+
+                return fetch(scriptURL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+            });
+
+            Promise.all(promises)
+                .then(() => {
+                    const memberNames = members.map(m => m.name).join(', ');
+                    if (response === 'Conferma') {
+                        successMsg.textContent = `Grazie! Partecipazione confermata.`;
+                    } else {
+                        successMsg.textContent = `Grazie per avercelo comunicato.`;
+                    }
+                    successMsg.style.color = '#0a0';
+                    successMsg.classList.remove('hidden');
+                    
+                    console.log('Responses sent:', members);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    successMsg.textContent = 'Errore nell\'invio. Riprova più tardi.';
+                    successMsg.style.color = '#c00';
+                    successMsg.classList.remove('hidden');
+                });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Day - Lorenzo & Teresa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        
+        body {
+        font-family: 'Goudy Old Style', 'Times New Roman', Times, serif;
+        line-height: 1.6;
+        background: #ffffff;
+        color: #000000;
+        min-height: 100vh;
+        margin-right: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .wedding-date {
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: #000000;
+            text-align: center;
+            padding-top: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .site-title {
+            display: block;
+            max-width: 400px;
+            height: auto;
+            margin: 0 auto;
+            padding-top: 2rem;
+            padding-bottom: 0.5rem;
+        }
+
+        nav {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+            
+        nav a {
+        display: inline-block;
+        padding: 0.75rem 2rem;
+        background: #ffffff;
+        color: #000000;
+        text-decoration: none;
+        border-radius: 0px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        nav a:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        background: #000000;
+        color: #ffffff;
+        }
+
+        .wedding-day-section {
+            padding: 2rem 0;
+            background: #ffffff;
+            margin: 2rem 0;
+        }
+
+        .wedding-day-section h2 {
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: #000000;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .events-container {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .divider-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .divider-image svg {
+            width: 180px;
+            height: 32px;
+            display: block;
+            color: #6b8a5a;
+        }
+
+        .event-card {
+            background: #ffffff;
+            padding: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-card h3 {
+            font-size: 2.5rem;
+            font-weight: 400;
+            text-align: center;
+            color: #000000;
+            margin-bottom: 1rem;
+        }
+
+        .event-details {
+            margin-top: 1rem;
+        }
+
+        .event-details p {
+            margin-bottom: 0.5rem;
+            font-size: 1.6rem;
+            text-align: center;
+        }
+
+        .event-details strong {
+            font-weight: 600;
+        }
+
+        footer {
+            margin-top: 4rem;
+            width: 100%;
+            padding: 0;
+        }
+
+        footer img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .event-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="image_example.png" alt="Lorenzo & Teresa" class="site-title">
+        <p class="wedding-date">30 Maggio 2026 - Ravenna</p>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="wedding-day.html">Programma</a></li>
+                <li><a href="#registry">Registry</a></li>
+                <li><a href="rsvp-temp.html">RSVP</a></li>
+            </ul>
+        </nav>
+       
+        <section class="wedding-day-section">
+            <h2>Programma</h2>
+            
+            <div class="events-container">
+                <div class="event-card">
+                    <h3>Messa Matrimoniale</h3>
+                    <div class="event-details">
+                        <p><strong>Quando:</strong> 11:00</p>
+                        <p><strong>Dove:</strong> Basilica di Santa Maria Maggiore</p>
+                        <p><strong>Indirizzo:</strong> Via Galla Placidia (SNC), Ravenna</p>
+                    </div>
+                </div>
+
+                <div class="divider-image" aria-hidden="true">
+                    <svg viewBox="0 0 128 24" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" role="img" aria-label="decorative divider">
+                        <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+                            <path d="M4 12 C22 11 28 6 34 12"/>
+                            <path d="M16 12 C24 14 30 18 36 12"/>
+                            <path d="M28 12 C36 9 42 6 48 12"/>
+                            <path d="M40 12 C48 15 54 18 60 12"/>
+                            <path d="M52 12 C60 9 66 6 72 12"/>
+                            <path d="M64 12 C72 14 78 18 84 12"/>
+                            <path d="M76 12 C84 9 90 6 96 12"/>
+                            <path d="M88 12 C96 15 102 18 108 12"/>
+                            <path d="M100 12 L124 12"/>
+                        </g>
+                    </svg>
+                </div>
+
+                <div class="event-card">
+                    <h3>Ricevimento</h3>
+                    <div class="event-details">
+                        <p><strong>Quando:</strong> 13:30</p>
+                        <p><strong>Dove:</strong> Palazzo Manzoni</p>
+                        <p><strong>Indirizzo:</strong> Via Angelo Manzoni 23, San Zaccaria (RA)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+        
+</body>
+</html>
