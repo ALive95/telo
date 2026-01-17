@@ -169,6 +169,11 @@
     </style>
 </head>
 <body>
+    <script>
+        if (!sessionStorage.getItem('authenticated')) {
+            window.location.href = 'login.html';
+        }
+    </script>
     <div class="container">
         <img src="image_example.png" alt="Lorenzo & Teresa" class="site-title">
         <p class="wedding-date">30 Maggio 2026 - Ravenna</p>
