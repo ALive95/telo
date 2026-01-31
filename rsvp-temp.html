@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RSVP - Lorenzo & Teresa</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Goudy Old Style', 'Times New Roman', Times, serif;
@@ -18,16 +14,17 @@
             color: #000000;
             min-height: 100vh;
             margin-right: 0;
+            padding-bottom: 2rem;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1.25rem;
         }
 
         .wedding-date {
-            font-size: 1.6rem;
+            font-size: clamp(0.9rem, 2.5vw, 1.6rem);
             font-weight: 400;
             color: #000000;
             text-align: center;
@@ -40,183 +37,93 @@
             max-width: 400px;
             height: auto;
             margin: 0 auto;
-            padding-top: 2rem;
+            padding-top: 1.5rem;
             padding-bottom: 0.5rem;
-        }
-        
-        
-        nav {
-            text-align: center;
-            margin-bottom: 2rem;
+            width: 100%;
         }
 
+        nav { text-align: center; margin-bottom: 1.25rem; }
+
         nav ul {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            gap: 2rem;
-            flex-wrap: wrap;
+            display: flex; justify-content: center; list-style: none; gap: 1rem; flex-wrap: wrap; padding: 0; margin: 0;
         }
 
         nav a {
-            display: inline-block;
-            padding: 0.75rem 2rem;
-            background: #ffffff;
-            color: #000000;
-            text-decoration: none;
-            border-radius: 0px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(0, 0, 0, 0.2);
+            display: inline-block; padding: 0.5rem 1rem; background: #ffffff; color: #000; text-decoration: none; border-radius: 6px; font-weight: 600; transition: all .25s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.08); font-size: clamp(0.95rem, 2.4vw, 1rem);
         }
 
-        nav a:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            background: #000000;
-            color: #ffffff;
-            }
+        nav a:hover { transform: translateY(-1px); background: #000; color: #fff; }
 
-        h2 {
-            font-size: 2rem;
-            font-weight: 400;
-            color: #000000;
-            text-align: center;
-            margin: 2rem 0;
-        }
+        h2 { font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 400; color: #000; text-align: center; margin: 1.25rem 0; }
 
+        /* Make sections responsive */
         .search-section, .confirmation-section {
-            background: #ffffff;
-            padding: 3rem;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            margin: 2rem 0;
+            background: #ffffff; padding: 1.5rem; border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 4px 15px rgba(0,0,0,0.06); margin: 1.25rem 0; border-radius: 8px;
         }
 
-        .hidden {
-            display: none;
-        }
+        .hidden { display: none; }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
+        .form-group { margin-bottom: 1rem; }
 
-        label {
-            display: block;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
+        label { display: block; font-size: clamp(0.95rem, 2.2vw, 1.1rem); margin-bottom: 0.5rem; font-weight: 600; }
 
         input[type="text"] {
-            width: 100%;
-            padding: 0.75rem;
-            font-size: 1rem;
-            font-family: 'Goudy Old Style', 'Times New Roman', Times, serif;
-            border: 1px solid rgba(0, 0, 0, 0.2);
-            border-radius: 0px;
+            width: 100%; padding: 0.75rem; font-size: clamp(0.95rem, 2.2vw, 1rem); font-family: 'Goudy Old Style', 'Times New Roman', Times, serif; border: 1px solid rgba(0,0,0,0.12); border-radius: 6px; box-sizing: border-box;
         }
 
         button {
-            display: inline-block;
-            padding: 1rem 3rem;
-            background: #000000;
-            color: #ffffff;
-            border: none;
-            cursor: pointer;
-            font-size: 1.2rem;
-            font-family: 'Goudy Old Style', 'Times New Roman', Times, serif;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            margin-top: 1rem;
+            display: inline-block; padding: 0.9rem 1.6rem; background: #000; color: #fff; border: none; cursor: pointer; font-size: clamp(1rem, 3.6vw, 1.15rem); font-family: 'Goudy Old Style', 'Times New Roman', Times, serif; font-weight: 600; transition: all .25s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.12); border-radius: 6px; min-height: 44px;
         }
 
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-            background: #333333;
+        button[style] { /* for inline style 'background: #666;' on decline button */ }
+
+        button:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.14); background: #333; }
+
+        .error-message { color: #c00; margin-top: 1rem; font-size: 1rem; }
+
+        .guest-info { background: #f9f9f9; padding: 1rem; border: 1px solid rgba(0,0,0,0.08); margin: 1rem 0; border-radius: 6px; }
+
+        .guest-info p { font-size: 1.05rem; margin-bottom: 0.5rem; }
+
+        .guest-info strong { font-weight: 600; }
+
+        .family-member { display: flex; align-items: center; padding: .75rem; margin: .4rem 0; background: #fff; border: 1px solid rgba(0,0,0,0.06); border-radius: 6px; gap: .75rem; }
+
+        .family-member input[type="checkbox"] { width: 22px; height: 22px; margin: 0; cursor: pointer; flex: 0 0 auto; }
+
+        .family-member input[type="checkbox"]:disabled { cursor: not-allowed; opacity: 0.5; }
+
+        .family-member.disabled { opacity: 0.6; pointer-events: none; }
+
+        .family-member.disabled label { cursor: not-allowed; }
+
+        .family-member label { flex: 1; font-size: 1.05rem; font-weight: 400; cursor: pointer; margin: 0; }
+
+        .member-details { font-size: 0.9rem; color: #666; margin-left: 0.5rem; }
+
+        .button-group { display: flex; gap: 0.75rem; justify-content: center; margin-top: 1.25rem; }
+
+        .success-message { text-align: center; font-size: 1.15rem; color: #0a0; margin-top: 1.25rem; }
+
+        /* Tablet */
+        @media (max-width: 768px) {
+            .container { padding: 0.9rem; }
+            .search-section, .confirmation-section { padding: 1rem; }
+            .button-group { flex-direction: column; gap: .6rem; }
+            button { width: 100%; }
+            .family-member { flex-direction: row; align-items: center; }
+            #dietarySection { margin-top: 1rem; }
         }
 
-        .error-message {
-            color: #c00;
-            margin-top: 1rem;
-            font-size: 1rem;
-        }
-
-        .guest-info {
-            background: #f9f9f9;
-            padding: 2rem;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            margin: 2rem 0;
-        }
-
-        .guest-info p {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .guest-info strong {
-            font-weight: 600;
-        }
-
-        .family-member {
-            display: flex;
-            align-items: center;
-            padding: 1rem;
-            margin: 0.5rem 0;
-            background: #ffffff;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .family-member input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            margin-right: 1rem;
-            cursor: pointer;
-        }
-
-        .family-member input[type="checkbox"]:disabled {
-            cursor: not-allowed;
-            opacity: 0.5;
-        }
-
-        .family-member.disabled {
-            opacity: 0.6;
-            pointer-events: none;
-        }
-
-        .family-member.disabled label {
-            cursor: not-allowed;
-        }
-
-        .family-member label {
-            flex: 1;
-            font-size: 1.1rem;
-            font-weight: 400;
-            cursor: pointer;
-            margin: 0;
-        }
-
-        .member-details {
-            font-size: 0.9rem;
-            color: #666;
-            margin-left: 0.5rem;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 2rem;
-        }
-
-        .success-message {
-            text-align: center;
-            font-size: 1.3rem;
-            color: #0a0;
-            margin-top: 2rem;
+        /* Small phones */
+        @media (max-width: 420px) {
+            nav ul { gap: .5rem; }
+            .site-title { max-width: 90%; }
+            .search-section, .confirmation-section { padding: .75rem; }
+            .family-member { padding: .6rem; }
+            .member-details { display: block; margin-left: 0; margin-top: .5rem; }
+            label { font-size: .98rem; }
+            button { font-size: 1rem; padding: .85rem; }
         }
     </style>
 </head>
@@ -224,7 +131,7 @@
     <script>
         if (!sessionStorage.getItem('authenticated')) {
             window.location.href = 'login.html';
-        }
+    }
     </script>
     <div class="container">
         <img src="image_example.png" alt="Lorenzo & Teresa" class="site-title">
@@ -234,7 +141,7 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="wedding-day.html">Programma</a></li>
-                <li><a href="#registry">Registry</a></li>
+                <li><a href="#registry">Lista Nozze</a></li>
                 <li><a href="rsvp-temp.html">RSVP</a></li>
             </ul>
         </nav>
@@ -365,7 +272,7 @@
                     html += `
                         <div id="plusOneSelector${index}" class="family-member" style="display: none; margin-left: 2rem; background: #f0f0f0;">
                             <label style="margin-right: 1rem;">Numero di accompagnatori:</label>
-                            <select id="plusOneCount${index}" style="padding: 0.5rem; font-size: 1rem; font-family: 'Goudy Old Style', 'Times New Roman', Times, serif;">
+                            <select id="plusOneCount${index}" onchange="renderPlusOneNames(${index})" style="padding: 0.5rem; font-size: 1rem; font-family: 'Goudy Old Style', 'Times New Roman', Times, serif;">
                     `;
                     for (let i = 0; i <= member.plusOne; i++) {
                         html += `<option value="${i}">${i}</option>`;
@@ -373,6 +280,7 @@
                     html += `
                             </select>
                         </div>
+                        <div id="plusOneNames${index}" style="display:none; margin-left: 2rem;"></div>
                     `;
                 }
             });
@@ -380,12 +288,48 @@
             guestInfo.innerHTML = html;
         }
 
-        // Toggle plusOne selector visibility
+        // Toggle plusOne selector visibility (and render names if needed)
         function togglePlusOneSelector(index) {
             const checkbox = document.getElementById(`member${index}`);
             const selector = document.getElementById(`plusOneSelector${index}`);
+            const namesContainer = document.getElementById(`plusOneNames${index}`);
             if (selector) {
                 selector.style.display = checkbox.checked ? 'flex' : 'none';
+            }
+            if (!checkbox.checked && namesContainer) {
+                namesContainer.style.display = 'none';
+                namesContainer.innerHTML = '';
+                // reset select to 0
+                const plusOneSelect = document.getElementById(`plusOneCount${index}`);
+                if (plusOneSelect) plusOneSelect.value = '0';
+            } else if (checkbox.checked) {
+                // if the select already has a value > 0, render name inputs
+                renderPlusOneNames(index);
+            }
+        }
+
+        // Render input fields to collect plus-one names
+        function renderPlusOneNames(index) {
+            const countSelect = document.getElementById(`plusOneCount${index}`);
+            const namesContainer = document.getElementById(`plusOneNames${index}`);
+            if (!countSelect || !namesContainer) return;
+            const count = parseInt(countSelect.value);
+            if (count > 0) {
+                let html = '<div style="margin-top: 0.75rem;">';
+                for (let i = 1; i <= count; i++) {
+                    html += `
+                        <div style="margin-bottom: .5rem;">
+                            <label for="plusOneName${index}_${i}" style="display:block; font-weight:600; margin-bottom: .25rem;">Nome accompagnatore ${i}:</label>
+                            <input type="text" id="plusOneName${index}_${i}" placeholder="Nome e Cognome" style="padding: .5rem; width: 100%; box-sizing: border-box; font-family: 'Goudy Old Style', 'Times New Roman', Times, serif;">
+                        </div>
+                    `;
+                }
+                html += '</div>';
+                namesContainer.innerHTML = html;
+                namesContainer.style.display = 'block';
+            } else {
+                namesContainer.style.display = 'none';
+                namesContainer.innerHTML = '';
             }
         }
 
@@ -397,11 +341,18 @@
                     checkbox.disabled = true;
                     checkbox.parentElement.classList.add('disabled');
                 }
-                
+
                 // Disable plusOne selector if exists
                 const plusOneSelect = document.getElementById(`plusOneCount${index}`);
                 if (plusOneSelect) {
                     plusOneSelect.disabled = true;
+                }
+
+                // Disable plusOne name inputs if they exist
+                const namesContainer = document.getElementById(`plusOneNames${index}`);
+                if (namesContainer) {
+                    const inputs = namesContainer.querySelectorAll('input');
+                    inputs.forEach(inp => inp.disabled = true);
                 }
             });
             document.querySelector('.button-group').style.display = 'none';
@@ -443,21 +394,23 @@
             sendToGoogleSheets('Declina', checkedMembers, '');
         }
 
-        // Get checked family members including plusOnes
+        // Get checked family members including plusOnes (using entered plus-one names when available)
         function getCheckedMembers() {
             const checked = [];
             familyMembers.forEach((member, index) => {
                 const checkbox = document.getElementById(`member${index}`);
                 if (checkbox && checkbox.checked) {
                     checked.push(member);
-                    
+
                     // Add plusOnes as separate entries
                     const plusOneSelect = document.getElementById(`plusOneCount${index}`);
                     if (plusOneSelect) {
-                        const plusOneCount = parseInt(plusOneSelect.value);
+                        const plusOneCount = parseInt(plusOneSelect.value) || 0;
                         for (let i = 1; i <= plusOneCount; i++) {
+                            const nameInput = document.getElementById(`plusOneName${index}_${i}`);
+                            const plusOneName = nameInput && nameInput.value.trim() ? nameInput.value.trim() : `${member.name} (accompagnatore ${i})`;
                             checked.push({
-                                name: `${member.name} plusOne ${i}`,
+                                name: plusOneName,
                                 family: member.family,
                                 plusOne: 0
                             });
