@@ -141,7 +141,7 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="wedding-day.html">Programma</a></li>
-                <li><a href="#registry">Lista Nozze</a></li>
+                <li><a href="registry.html">Lista Nozze</a></li>
                 <li><a href="rsvp-temp.html">RSVP</a></li>
             </ul>
         </nav>
@@ -191,14 +191,92 @@
         // Guest database - organized by families
         // Each family member can RSVP individually
         let guestDatabase = [
-            { name: 'Mario Rossi', family: 'Rossi', plusOne: 1 },
-            { name: 'Laura Rossi', family: 'Rossi', plusOne: 0 },
-            { name: 'Giuseppe Bianchi', family: 'Bianchi', plusOne: 0 },
-            { name: 'Anna Bianchi', family: 'Bianchi', plusOne: 0 },
-            { name: 'Marco Bianchi', family: 'Bianchi', plusOne: 0 },
-            { name: 'Luca Verdi', family: 'Verdi', plusOne: 2 },
-            // Add more guests here in this format:
-            // { name: 'Nome Cognome', family: 'Famiglia', plusOne: 0 },
+            { name: 'Lorenzo', family: 'Sposi', plusOne: 0 },
+            { name: 'Teresa', family: 'Sposi', plusOne: 0 },
+            { name: 'Andrea Berardi', family: 'Berardi', plusOne: 0 },
+            { name: 'Cecilia Marcucci', family: 'Berardi', plusOne: 0 },
+            { name: 'Maria Berardi', family: 'Weaver', plusOne: 0 },
+            { name: 'Tommaso Berardi', family: 'Berardi', plusOne: 0 },
+            { name: 'Matthew Weaver', family: 'Weaver', plusOne: 0 },
+            { name: 'Giorgia Cherubini', family: '1', plusOne: 0 },
+            { name: 'Laure', family: '2', plusOne: 0 },
+            { name: 'Alfredo Liverani', family: 'Liverani', plusOne: 0 },
+            { name: 'Stefania Ciarlantini', family: 'Liverani', plusOne: 0 },
+            { name: 'Giovanni Liverani', family: '1', plusOne: 0 },
+            { name: 'Elena Liverani', family: 'Liverani', plusOne: 0 },
+            { name: 'Gianluca Pezzi', family: 'Pezzi', plusOne: 0 },
+            { name: 'Silvia Berardi', family: 'Pezzi', plusOne: 0 },
+            { name: 'Matteo Pezzi', family: '2', plusOne: 0 },
+            { name: 'Francesco Pezzi', family: 'Pezzi', plusOne: 0 },
+            { name: 'Davide Pezzi', family: 'Pezzi', plusOne: 0 },
+            { name: 'Cristina Marcucci', family: 'Aronna', plusOne: 0 },
+            { name: 'Francesco Aronna', family: 'Aronna', plusOne: 0 },
+            { name: 'Carlo Marcucci', family: 'Marcucci', plusOne: 0 },
+            { name: 'Alessandra Curti', family: 'Marcucci', plusOne: 0 },
+            { name: 'Mauro Berardi', family: '3', plusOne: 0 },
+            { name: 'Gianna', family: '4', plusOne: 0 },
+            { name: 'Virgilio', family: 'Virgilio', plusOne: 0 },
+            { name: 'Fiorella', family: 'Virgilio', plusOne: 0 },
+            { name: 'Luigi Ciarlantini', family: 'Ciarlantini', plusOne: 0 },
+            { name: 'Laura', family: 'Ciarlantini', plusOne: 0 },
+            { name: 'Anna Ciarlantini', family: '5', plusOne: 0 },
+            { name: 'Alessandro', family: '5', plusOne: 0 },
+            { name: 'Sara Ciarlantini', family: 'Ciarlantini', plusOne: 0 },
+            { name: 'Dario Ciarlantini', family: 'Ciarlantini 2', plusOne: 0 },
+            { name: 'Heather Cousins', family: 'Ciarlantini 2', plusOne: 0 },
+            { name: 'Allegra Ciarlantini', family: 'Ciarlantini 2', plusOne: 0 },
+            { name: 'Stella Ciarlantini', family: 'Ciarlantini 2', plusOne: 0 },
+            { name: 'Enrico Liverani', family: 'Liverani 2', plusOne: 0 },
+            { name: 'Silvia', family: 'Liverani 2', plusOne: 0 },
+            { name: 'Francesca Liverani', family: 'Liverani 3', plusOne: 0 },
+            { name: 'Ilaria Lando', family: 'Liverani 3', plusOne: 0 },
+            { name: 'Lidia Spadoni', family: 'Spadoni', plusOne: 0 },
+            { name: 'Maria Giuntoli', family: 'Giuntoli', plusOne: 0 },
+            { name: 'Barbara Friolo', family: 'Friolo', plusOne: 0 },
+            { name: 'Rosa Friolo', family: '6', plusOne: 0 },
+            { name: 'Piero Scarciglia', family: '6', plusOne: 0 },
+            { name: 'Ugo Ceroni', family: 'Ceroni', plusOne: 0 },
+            { name: 'Antonella Allegra', family: 'Ceroni', plusOne: 0 },
+            { name: 'Carlo Bolognesi', family: 'Bolognesi', plusOne: 0 },
+            { name: 'Barbara', family: 'Bolognesi', plusOne: 0 },
+            { name: 'Carlo Franco Bolognesi', family: 'Bolognesi', plusOne: 0 },
+            { name: 'Carlo Bertondini', family: '11', plusOne: 0 },
+            { name: 'Sara Pirazzoli', family: '12', plusOne: 0 },
+            { name: 'Claudio Rigotti', family: 'Rigotti', plusOne: 0 },
+            { name: 'Elisabetta Agostini', family: 'Rigotti', plusOne: 0 },
+            { name: 'Anna Rigotti', family: 'Rigotti', plusOne: 0 },
+            { name: 'Livia Rigotti', family: 'Rigotti', plusOne: 0 },
+            { name: 'Laura Rigotti', family: '7', plusOne: 1 },
+            { name: 'Davide Venturi', family: 'Venturi', plusOne: 0 },
+            { name: 'Laura Bolognesi', family: 'Venturi', plusOne: 0 },
+            { name: 'Giulio Carlo Venturi', family: 'Venturi', plusOne: 1 },
+            { name: 'Pierfrancesco Venturi', family: 'Venturi', plusOne: 0 },
+            { name: 'Claudio Aurelio Venturi', family: 'Venturi', plusOne: 0 },
+            { name: 'Roberto Zanoni', family: 'Zanoni', plusOne: 0 },
+            { name: 'Roberta Colombo', family: 'Zanoni', plusOne: 0 },
+            { name: 'Don Rosino Gabbiadini', family: 'Gabbiadini', plusOne: 0 },
+            { name: 'Licia Piraccini', family: 'Tommasini', plusOne: 0 },
+            { name: 'Alberto Tommasini', family: 'Tommasini', plusOne: 0 },
+            { name: 'Silvia Lama', family: 'Lama', plusOne: 1 },
+            { name: 'Christian Esposito', family: 'Esposito', plusOne: 1 },
+            { name: 'Xhenifer Guza', family: 'Belli', plusOne: 0 },
+            { name: 'Francesco Belli', family: 'Belli', plusOne: 0 },
+            { name: 'Lorenzo Maugeri', family: 'Maugeri', plusOne: 1 },
+            { name: 'Davide Barbi', family: '8', plusOne: 0 },
+            { name: 'Giulia Mattioli', family: '8', plusOne: 0 },
+            { name: 'Gianmarco Bilotti', family: 'Bilotti', plusOne: 0 },
+            { name: 'Francesca Asturi', family: 'Bilotti', plusOne: 0 },
+            { name: 'Fabio Mercurio', family: 'Mercurio', plusOne: 1 },
+            { name: 'Enrico Manuzzi', family: 'Manuzzi', plusOne: 1 },
+            { name: 'Gilda Matteucci', family: '9', plusOne: 0 },
+            { name: 'Alessandro Capelli', family: '9', plusOne: 0 },
+            { name: 'Paolo Trilli', family: 'Trilli', plusOne: 1 },
+            { name: 'Giovanni Ardenghi', family: 'Ardenghi', plusOne: 1 },
+            { name: 'Chiara Lelli', family: 'Lelli', plusOne: 1 },
+            { name: 'Timothée Crin-Barat', family: '10', plusOne: 0 },
+            { name: 'Hualin Xiao', family: '10', plusOne: 0 },
+            { name: 'Ilias Ftouhi', family: 'Ftouhi', plusOne: 1 },
+            { name: 'Dario Domanin', family: 'Domanin', plusOne: 1 }
         ];
         
         let currentGuest = null;
@@ -253,7 +331,17 @@
 
             // Display family info and members
             const guestInfo = document.getElementById('guestInfo');
-            let html = `<p><strong>Famiglia:</strong> ${currentGuest.family}</p>`;
+            // Compute a display family name: hide pure numbers, and strip trailing numeric suffixes (e.g., 'Liverani 2' -> 'Liverani')
+            const rawFamily = String(currentGuest.family || '').trim();
+            let displayFamily = '';
+            if (!/^\d+$/.test(rawFamily) && rawFamily.length > 0) {
+                displayFamily = rawFamily.replace(/\s+\d+$/, '');
+            }
+
+            let html = '';
+            if (displayFamily) {
+                html += `<p><strong>Famiglia:</strong> ${displayFamily}</p>`;
+            }
             html += `<p style="margin-top: 1.5rem; margin-bottom: 1rem;"><strong>Seleziona i partecipanti:</strong></p>`;
             
             // Create checkbox for each family member
