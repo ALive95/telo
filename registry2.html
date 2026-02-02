@@ -77,18 +77,14 @@
         }
 
         .registry-content {
-            display: flex;
-            gap: 2rem;
             max-width: 900px;
             margin: 0 auto;
             padding: 0 0.5rem;
-            align-items: flex-start;
         }
 
         .registry-text {
             font-size: clamp(1rem, 3.5vw, 1.3rem);
             line-height: 1.8;
-            text-align: justify;
         }
 
         .registry-text p {
@@ -96,8 +92,8 @@
         }
 
         .registry-image {
-            flex: 0 0 450px;
             max-width: 600px;
+            margin: 2rem auto 0;
         }
 
         .registry-image img {
@@ -133,16 +129,6 @@
 
         /* Tablet */
         @media (max-width: 768px) {
-            .registry-content {
-                flex-direction: column;
-            }
-            
-            .registry-image {
-                flex: 0 0 auto;
-                max-width: 100%;
-                width: 100%;
-            }
-            
             .registry-section { margin: 1rem 0; padding: 1rem 0; }
         }
 
@@ -190,10 +176,10 @@
                         <p>IT00 0000 0000 0000 0000 0000 000</p>
                     </div>
                 </div>
-                
-                <div class="registry-image">
-                    <img src="vienna.jpg" alt="Vienna">
-                </div>
+            </div>
+            
+            <div class="registry-image">
+                <img src="vienna.jpg" alt="Vienna">
             </div>
         </section>
 
