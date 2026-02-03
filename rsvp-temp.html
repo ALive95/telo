@@ -141,7 +141,6 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="wedding-day.html">Programma</a></li>
-                <li><a href="registry.html">"Lista" Nozze</a></li>
                 <li><a href="registry2.html">"Lista" Nozze 2</a></li>
                 <li><a href="rsvp-temp.html">RSVP</a></li>
             </ul>
@@ -192,43 +191,44 @@
         // Guest database - organized by families
         // Each family member can RSVP individually
         let guestDatabase = [
-            { name: 'Lorenzo', family: 'Sposi', plusOne: 0 },
-            { name: 'Teresa', family: 'Sposi', plusOne: 0 },
+            { name: 'Lorenzo Liverani', family: 'Sposi', plusOne: 0 },
+            { name: 'Teresa Berardi', family: 'Sposi', plusOne: 0 },
             { name: 'Andrea Berardi', family: 'Berardi', plusOne: 0 },
             { name: 'Cecilia Marcucci', family: 'Berardi', plusOne: 0 },
-            { name: 'Maria Berardi', family: 'Weaver', plusOne: 0 },
             { name: 'Tommaso Berardi', family: 'Berardi', plusOne: 0 },
-            { name: 'Matthew Weaver', family: 'Weaver', plusOne: 0 },
-            { name: 'Giorgia Cherubini', family: '1', plusOne: 0 },
-            { name: 'Laure', family: '2', plusOne: 0 },
+            { name: 'Matt Weaver', family: 'Weaver', plusOne: 0, aliases: ['Matthew Weaver', 'Matthew James Weaver'] },
+            { name: 'Maria Berardi', family: 'Weaver', plusOne: 0 },
             { name: 'Alfredo Liverani', family: 'Liverani', plusOne: 0 },
             { name: 'Stefania Ciarlantini', family: 'Liverani', plusOne: 0 },
-            { name: 'Giovanni Liverani', family: '1', plusOne: 0 },
             { name: 'Elena Liverani', family: 'Liverani', plusOne: 0 },
-            { name: 'Gianluca Pezzi', family: 'Pezzi', plusOne: 0 },
+            { name: 'Giovanni Liverani', family: '1', plusOne: 0 },
+            { name: 'Giorgia Cherubini', family: '1', plusOne: 0 },
+            { name: 'Gianluca Pezzi', family: 'Pezzi', plusOne: 0, aliases: ['Luca Pezzi'] },
             { name: 'Silvia Berardi', family: 'Pezzi', plusOne: 0 },
-            { name: 'Matteo Pezzi', family: '2', plusOne: 0 },
             { name: 'Francesco Pezzi', family: 'Pezzi', plusOne: 0 },
             { name: 'Davide Pezzi', family: 'Pezzi', plusOne: 0 },
-            { name: 'Cristina Marcucci', family: 'Aronna', plusOne: 0 },
+            { name: 'Matteo Pezzi', family: '2', plusOne: 0 },
+            { name: 'Laure Hoffman', family: '2', plusOne: 0 },
             { name: 'Francesco Aronna', family: 'Aronna', plusOne: 0 },
+            { name: 'Cristina Marcucci', family: 'Aronna', plusOne: 0 },
             { name: 'Carlo Marcucci', family: 'Marcucci', plusOne: 0 },
-            { name: 'Alessandra Curti', family: 'Marcucci', plusOne: 0 },
+            { name: 'Alessandra Curti', family: 'Marcucci', plusOne: 0, aliases: ['Alessandra Marcucci'] },
+            { name: 'Paolo Bertelli', family: 'Bertelli', plusOne: 0 },
+            { name: 'Marina Marcucci', family: 'Bertelli', plusOne: 0, aliases: ['Marina Bertelli'] },
             { name: 'Mauro Berardi', family: '3', plusOne: 0 },
-            { name: 'Gianna', family: '4', plusOne: 0 },
-            { name: 'Virgilio', family: 'Virgilio', plusOne: 0 },
-            { name: 'Fiorella', family: 'Virgilio', plusOne: 0 },
+            { name: 'Gianna Scardovi', family: '4', plusOne: 0, aliases: ['Giovanna Scardovi'] },
+            { name: 'Virgilio Ricci', family: 'Virgilio', plusOne: 0 },
+            { name: 'Fiorella Bacchilega', family: 'Virgilio', plusOne: 0, aliases: ['Fiorella Ricci'] },
             { name: 'Luigi Ciarlantini', family: 'Ciarlantini', plusOne: 0 },
             { name: 'Laura Storati', family: 'Ciarlantini', plusOne: 0 },
-            { name: 'Anna Ciarlantini', family: '5', plusOne: 0 },
-            { name: 'Alessandro', family: '5', plusOne: 0 },
             { name: 'Sara Ciarlantini', family: 'Ciarlantini', plusOne: 0 },
+            { name: 'Anna Ciarlantini', family: '5', plusOne: 0 },
             { name: 'Dario Ciarlantini', family: 'Ciarlantini 2', plusOne: 0 },
             { name: 'Heather Cousins', family: 'Ciarlantini 2', plusOne: 0 },
             { name: 'Allegra Ciarlantini', family: 'Ciarlantini 2', plusOne: 0 },
             { name: 'Stella Ciarlantini', family: 'Ciarlantini 2', plusOne: 0 },
             { name: 'Enrico Liverani', family: 'Liverani 2', plusOne: 0 },
-            { name: 'Silvia', family: 'Liverani 2', plusOne: 0 },
+            { name: 'Silvia Piccinini', family: 'Liverani 2', plusOne: 0 },
             { name: 'Francesca Liverani', family: 'Liverani 3', plusOne: 0 },
             { name: 'Ilaria Lando', family: 'Liverani 3', plusOne: 0 },
             { name: 'Lidia Spadoni', family: 'Spadoni', plusOne: 0 },
@@ -237,9 +237,9 @@
             { name: 'Rosa Friolo', family: '6', plusOne: 0 },
             { name: 'Piero Scarciglia', family: '6', plusOne: 0 },
             { name: 'Ugo Ceroni', family: 'Ceroni', plusOne: 0 },
-            { name: 'Antonella Allegra', family: 'Ceroni', plusOne: 0 },
+            { name: 'Antonella Allegra', family: 'Ceroni', plusOne: 0, aliases: ['Antonella Ceroni'] },
             { name: 'Carlo Bolognesi', family: 'Bolognesi', plusOne: 0 },
-            { name: 'Barbara', family: 'Bolognesi', plusOne: 0 },
+            { name: 'Barbara Ferretti', family: 'Bolognesi', plusOne: 0, aliases: ['Barbara Bolognesi'] },
             { name: 'Carlo Franco Bolognesi', family: 'Bolognesi', plusOne: 0 },
             { name: 'Carlo Bertondini', family: '11', plusOne: 0 },
             { name: 'Sara Pirazzoli', family: '12', plusOne: 0 },
@@ -249,19 +249,19 @@
             { name: 'Livia Rigotti', family: 'Rigotti', plusOne: 0 },
             { name: 'Laura Rigotti', family: '7', plusOne: 1 },
             { name: 'Davide Venturi', family: 'Venturi', plusOne: 0 },
-            { name: 'Laura Bolognesi', family: 'Venturi', plusOne: 0 },
-            { name: 'Giulio Carlo Venturi', family: 'Venturi', plusOne: 0 },
-            { name: 'Pierfrancesco Venturi', family: 'Venturi', plusOne: 0 },
-            { name: 'Claudio Aurelio Venturi', family: 'Venturi', plusOne: 0 },
+            { name: 'Laura Bolognesi', family: 'Venturi', plusOne: 0, aliases: ['Laura Venturi'] },
+            { name: 'Giulio Carlo Venturi', family: 'Venturi', plusOne: 0, aliases: ['Giulio Venturi'] },
+            { name: 'Pierfrancesco Venturi', family: 'Venturi', plusOne: 0, aliases: ['Piero Venturi'] },
+            { name: 'Claudio Aurelio Venturi', family: 'Venturi', plusOne: 0, aliases: ['Claudio Venturi'] },
             { name: 'Roberto Zanoni', family: 'Zanoni', plusOne: 0 },
             { name: 'Roberta Colombo', family: 'Zanoni', plusOne: 0 },
-            { name: 'Don Rosino Gabbiadini', family: 'Gabbiadini', plusOne: 0 },
-            { name: 'Licia Piraccini', family: 'Tommasini', plusOne: 0 },
+            { name: 'Don Rosino Gabbiadini', family: 'Gabbiadini', plusOne: 0, aliases: ['Rosino Gabbiadini', 'Don Rosino'] },
             { name: 'Alberto Tommasini', family: 'Tommasini', plusOne: 0 },
+            { name: 'Licia Piraccini', family: 'Tommasini', plusOne: 0, aliases: ['Licia Tommasini'] },
             { name: 'Silvia Lama', family: 'Lama', plusOne: 1 },
             { name: 'Christian Esposito', family: 'Esposito', plusOne: 1 },
-            { name: 'Xhenifer Guza', family: 'Belli', plusOne: 0 },
             { name: 'Francesco Belli', family: 'Belli', plusOne: 0 },
+            { name: 'Xhenifer Guza', family: 'Belli', plusOne: 0 },
             { name: 'Lorenzo Maugeri', family: 'Maugeri', plusOne: 1 },
             { name: 'Davide Barbi', family: '8', plusOne: 0 },
             { name: 'Giulia Mattioli', family: '8', plusOne: 0 },
@@ -275,7 +275,7 @@
             { name: 'Giovanni Ardenghi', family: 'Ardenghi', plusOne: 1 },
             { name: 'Chiara Lelli', family: 'Lelli', plusOne: 1 },
             { name: 'Timothée Crin-Barat', family: '10', plusOne: 0 },
-            { name: 'Hualin Xiao', family: '10', plusOne: 0 },
+            { name: 'Hualin Xiao', family: '10', plusOne: 0, aliases: ['Hua Lin Xiao', 'Hua-Lin Xiao', 'Xiao Hualin', 'Xiao Hua Lin', 'Xiao Hua-Lin'] },
             { name: 'Ilias Ftouhi', family: 'Ftouhi', plusOne: 1 },
             { name: 'Dario Domanin', family: 'Domanin', plusOne: 1 }
         ];
@@ -285,7 +285,7 @@
 
         console.log('Guest database loaded:', guestDatabase);
 
-        // Search for guest
+        // Search for guest (supports optional `aliases` on each guest)
         function searchGuest() {
             const input = document.getElementById('nameInput').value.trim();
             const errorMsg = document.getElementById('errorMessage');
@@ -298,15 +298,25 @@
                 return;
             }
 
-            // Normalize input for comparison
-            const normalizedInput = input.toLowerCase().replace(/\s+/g, ' ');
+            // Normalize helper
+            function normalize(s) {
+                return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+            }
+
+            const normalizedInput = normalize(input);
             console.log('Normalized input:', normalizedInput);
-            
-            // Search in database
+
+            // Search in database, checking main name and optional aliases (array or '|' separated string)
             currentGuest = guestDatabase.find(guest => {
-                const normalizedGuest = guest.name.toLowerCase().replace(/\s+/g, ' ');
-                console.log('Comparing with:', normalizedGuest);
-                return normalizedGuest === normalizedInput;
+                const variants = [guest.name || ''];
+                if (guest.aliases) {
+                    if (Array.isArray(guest.aliases)) variants.push(...guest.aliases);
+                    else variants.push(...String(guest.aliases).split('|').map(s => s.trim()).filter(Boolean));
+                }
+
+                const matched = variants.some(v => normalize(v) === normalizedInput);
+                if (matched) console.log('Comparing variants for', guest.name, '=>', variants.map(normalize));
+                return matched;
             });
 
             console.log('Found guest:', currentGuest);

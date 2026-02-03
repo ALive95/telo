@@ -77,18 +77,65 @@
         }
 
         .registry-content {
-            max-width: 900px;
+            max-width: 700px;
             margin: 0 auto;
             padding: 0 0.5rem;
         }
 
-        .registry-text {
-            font-size: clamp(1rem, 3.5vw, 1.3rem);
-            line-height: 1.8;
+        /* Language switcher layout */
+        .lang-wrap {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
         }
 
-        .registry-text p {
+        .lang-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-left: -0.25rem;
+        }
+
+        .lang-button {
+            background: transparent;
+            border: none;
+            font-size: 1.6rem; /* flag size */
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+            border-radius: 8px;
+            width: 2.2rem;
+            height: 2.2rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.18s ease, box-shadow 0.18s ease, transform 0.12s ease;
+        }
+
+        .lang-button[aria-pressed="true"], .lang-button.active {
+            background: rgba(0, 0, 0, 0.12);
+            color: inherit;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            transform: translateY(-1px);
+        }
+
+        .lang-pane { flex: 1; }
+
+        .lang-content {
+            display: block;
+        }
+
+        .lang-content p {
+            font-size: clamp(1rem, 3.5vw, 1.3rem);
+            line-height: 1.8;
+            text-align: justify;
             margin-bottom: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .lang-wrap { flex-direction: column; }
+            .lang-buttons { flex-direction: row; gap: 0.75rem; margin-left: 0; }
+            .lang-button { font-size: 1.4rem; }
         }
 
         .registry-image {
@@ -106,21 +153,30 @@
             background: #f8f8f8;
             border: 1px solid rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-            padding: 1.5rem;
-            margin-top: 2rem;
+            padding: 0.9rem;
+            margin-top: 1rem;
             text-align: center;
+            line-height: 1.25;
         }
 
         .iban-box strong {
-            font-size: clamp(1.1rem, 3.5vw, 1.4rem);
+            font-size: clamp(1.05rem, 3.2vw, 1.2rem);
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.15rem;
         }
 
         .iban-box p {
             font-size: clamp(0.95rem, 3vw, 1.2rem);
             font-family: 'Courier New', monospace;
             letter-spacing: 1px;
+            margin: 0.12rem 0;
+            line-height: 1.2;
+            text-align: center;
+        }
+
+        /* small extra space between IBAN and account holder */
+        .iban-box p + p {
+            margin-top: 0.45rem;
         }
 
         footer { margin-top: 3rem; width: 100%; padding: 0; }
@@ -137,7 +193,7 @@
             nav ul { gap: .5rem; }
             .registry-section h2 { margin-bottom: 1rem; }
             .container { padding: 0 0.75rem; }
-            .iban-box { padding: 1rem; }
+            .iban-box { padding: 0.7rem; }
         }
     </style>
 </head>
@@ -154,26 +210,49 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="wedding-day.html">Programma</a></li>
-                <li><a href="registry.html">"Lista" Nozze</a></li>
-                <li><a href="registry2.html">"Lista" Nozze 2</a></li>
+                <li><a href="registry2.html">"Lista" Nozze</a></li>
                 <li><a href="rsvp-temp.html">RSVP</a></li>
             </ul>
         </nav>
        
         <section class="registry-section">
             <div class="registry-content">
-                <div class="registry-text">
-                    <p>La vostra compagnia e il vostro affetto sono per noi le cose più importanti. A chi parteciperà inviamo un ringraziamento speciale e comunichiamo una novità</p>
-                    
-                    <p><strong>Quest'anno ci trasferiamo a Vienna!</strong></p>
-                    
-                    <p>Non vediamo l'ora e stiamo cercando una nuova casa</p>
-                    
-                    <p>Questo significa che per noi è complicato fare una lista nozze tradizionale. Per chi volesse contribuire al nostro futuro possiamo fornirvi il seguente indirizzo</p>
-                    
-                    <div class="iban-box">
-                        <strong>IBAN:</strong>
-                        <p>IT00 0000 0000 0000 0000 0000 000</p>
+                <div class="lang-wrap">
+                    <div class="lang-buttons" role="tablist" aria-label="Seleziona lingua">
+                        <button class="lang-button active" data-lang="it" aria-pressed="true" title="Italiano" aria-label="Italiano">🇮🇹</button>
+                        <button class="lang-button" data-lang="en" aria-pressed="false" title="English" aria-label="English">🇬🇧</button>
+                    </div>
+
+                    <div class="lang-pane">
+                        <div class="lang-content" data-lang="it">
+                            <p>La vostra compagnia e il vostro affetto sono per noi le cose più importanti. A chi parteciperà inviamo un ringraziamento speciale e comunichiamo una novità</p>
+
+                            <p><strong>Quest'anno ci trasferiamo a Vienna!</strong></p>
+
+                            <p>Non vediamo l'ora e stiamo cercando una nuova casa</p>
+
+                            <p>Questo significa che per noi è complicato fare una lista nozze tradizionale. Per chi volesse contribuire al nostro futuro possiamo fornirvi il seguente IBAN</p>
+
+                            <div class="iban-box">
+                                <p><strong>IBAN:</strong> IT74T0538713120000000138081</p>
+                                <p><strong>Intestatario:</strong> Lorenzo Liverani</p>
+                            </div>
+                        </div>
+
+                        <div class="lang-content" data-lang="en" style="display:none;" aria-hidden="true">
+                            <p>Your presence and affection mean the world to us. To those who will attend we send a special thank you and share some news</p>
+
+                            <p><strong>This year we are moving to Vienna!</strong></p>
+
+                            <p>We can't wait and we're looking for a new home</p>
+
+                            <p>This means it's difficult for us to have a traditional wedding registry. If you'd like to contribute to our future, you can use the following IBAN</p>
+
+                            <div class="iban-box">
+                                <p><strong>IBAN:</strong> IT74T0538713120000000138081</p>
+                                <p><strong>Account holder:</strong> Lorenzo Liverani</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -184,6 +263,38 @@
         </section>
 
     </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const buttons = document.querySelectorAll('.lang-button');
+            const panes = document.querySelectorAll('.lang-content');
+
+            function setLang(lang) {
+                buttons.forEach(btn => {
+                    const isActive = btn.dataset.lang === lang;
+                    btn.classList.toggle('active', isActive);
+                    btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+                });
+
+                panes.forEach(p => {
+                    if (p.dataset.lang === lang) {
+                        p.style.display = '';
+                        p.removeAttribute('aria-hidden');
+                    } else {
+                        p.style.display = 'none';
+                        p.setAttribute('aria-hidden', 'true');
+                    }
+                });
+
+                try { localStorage.setItem('siteLang', lang); } catch (e) { /* ignore */ }
+            }
+
+            buttons.forEach(btn => btn.addEventListener('click', function () { setLang(this.dataset.lang); }));
+
+            const saved = localStorage.getItem('siteLang') || 'it';
+            setLang(saved);
+        });
+    </script>
         
 </body>
 </html>
