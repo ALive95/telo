@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RSVP - Lorenzo & Teresa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Upright:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Goudy Old Style', 'Times New Roman', Times, serif;
+            font-family: 'Cormorant Upright', serif;
             line-height: 1.6;
             background: #ffffff;
             color: #000000;
@@ -68,11 +71,11 @@
         label { display: block; font-size: clamp(0.95rem, 2.2vw, 1.1rem); margin-bottom: 0.5rem; font-weight: 600; }
 
         input[type="text"] {
-            width: 100%; padding: 0.75rem; font-size: clamp(0.95rem, 2.2vw, 1rem); font-family: 'Goudy Old Style', 'Times New Roman', Times, serif; border: 1px solid rgba(0,0,0,0.12); border-radius: 6px; box-sizing: border-box;
+            width: 100%; padding: 0.75rem; font-size: clamp(0.95rem, 2.2vw, 1rem); font-family: 'Cormorant Upright', serif; border: 1px solid rgba(0,0,0,0.12); border-radius: 6px; box-sizing: border-box;
         }
 
         button {
-            display: inline-block; padding: 0.9rem 1.6rem; background: #000; color: #fff; border: none; cursor: pointer; font-size: clamp(1rem, 3.6vw, 1.15rem); font-family: 'Goudy Old Style', 'Times New Roman', Times, serif; font-weight: 600; transition: all .25s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.12); border-radius: 6px; min-height: 44px;
+            display: inline-block; padding: 0.9rem 1.6rem; background: #000; color: #fff; border: none; cursor: pointer; font-size: clamp(1rem, 3.6vw, 1.15rem); font-family: 'Cormorant Upright', serif; font-weight: 600; transition: all .25s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.12); border-radius: 6px; min-height: 44px;
         }
 
         button[style] { /* for inline style 'background: #666;' on decline button */ }
@@ -372,7 +375,7 @@
                     html += `
                         <div id="plusOneSelector${index}" class="family-member" style="display: none; margin-left: 2rem; background: #f0f0f0;">
                             <label style="margin-right: 1rem;">Numero di accompagnatori:</label>
-                            <select id="plusOneCount${index}" onchange="renderPlusOneNames(${index})" style="padding: 0.5rem; font-size: 1rem; font-family: 'Goudy Old Style', 'Times New Roman', Times, serif;">
+                            <select id="plusOneCount${index}" onchange="renderPlusOneNames(${index})" style="padding: 0.5rem; font-size: 1rem; font-family: 'Cormorant Upright', serif;">
                     `;
                     for (let i = 0; i <= member.plusOne; i++) {
                         html += `<option value="${i}">${i}</option>`;
@@ -420,7 +423,7 @@
                     html += `
                         <div style="margin-bottom: .5rem;">
                             <label for="plusOneName${index}_${i}" style="display:block; font-weight:600; margin-bottom: .25rem;">Nome accompagnatore ${i}:</label>
-                            <input type="text" id="plusOneName${index}_${i}" placeholder="Nome e Cognome" style="padding: .5rem; width: 100%; box-sizing: border-box; font-family: 'Goudy Old Style', 'Times New Roman', Times, serif;">
+                            <input type="text" id="plusOneName${index}_${i}" placeholder="Nome e Cognome" style="padding: .5rem; width: 100%; box-sizing: border-box; font-family: 'Cormorant Upright', serif;">
                         </div>
                     `;
                 }
