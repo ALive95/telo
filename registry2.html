@@ -204,7 +204,7 @@
         }
     </script>
     <div class="container">
-        <img src="image_example.png" alt="Lorenzo & Teresa" class="site-title">
+        <img src="fiori_home.jpeg" alt="Lorenzo & Teresa" class="site-title">
         <p class="wedding-date">30 Maggio 2026 - Ravenna</p>
         <nav>
             <ul>
@@ -225,32 +225,32 @@
 
                     <div class="lang-pane">
                         <div class="lang-content" data-lang="it">
-                            <p>La vostra compagnia e il vostro affetto sono per noi le cose più importanti. A chi parteciperà inviamo un ringraziamento speciale e comunichiamo una novità</p>
+                            <p>La vostra compagnia e il vostro affetto sono per noi le cose più importanti. A chi parteciperà rivolgiamo un ringraziamento speciale e condividiamo una novità.</p>
 
-                            <p><strong>Quest'anno ci trasferiamo a Vienna!</strong></p>
+                            <p><strong>Quest’anno ci trasferiamo a Vienna!</strong></p>
 
-                            <p>Non vediamo l'ora e stiamo cercando una nuova casa</p>
+                            <p>Siamo molto felici di questo nuovo inizio e attualmente alla ricerca di una nuova casa.</p>
 
-                            <p>Questo significa che per noi è complicato fare una lista nozze tradizionale. Per chi volesse contribuire al nostro futuro possiamo fornirvi il seguente IBAN</p>
+                            <p>Questo rende per noi complessa l’organizzazione di una lista nozze tradizionale. A chi desiderasse contribuire al nostro futuro possiamo indicare il seguente IBAN:</p>
 
                             <div class="iban-box">
-                                <p><strong>IBAN:</strong> IT74T0538713120000000138081</p>
-                                <p><strong>Intestatario:</strong> Lorenzo Liverani</p>
+                                <p><strong>IBAN</strong> IT74T0538713120000000138081</p>
+                                <p><strong>Intestatario</strong> Lorenzo Liverani</p>
                             </div>
                         </div>
 
                         <div class="lang-content" data-lang="en" style="display:none;" aria-hidden="true">
-                            <p>Your presence and affection mean the world to us. To those who will attend we send a special thank you and share some news</p>
+                            <p>Your presence and affection mean the world to us. To those who will be joining us, we extend our heartfelt thanks and would like to share some news.</p>
 
-                            <p><strong>This year we are moving to Vienna!</strong></p>
+                            <p><strong>This year, we are moving to Vienna!</strong></p>
 
-                            <p>We can't wait and we're looking for a new home</p>
+                            <p>We are very much looking forward to this new beginning and are currently searching for a new home.</p>
 
-                            <p>This means it's difficult for us to have a traditional wedding registry. If you'd like to contribute to our future, you can use the following IBAN</p>
+                            <p>This makes it difficult for us to organize a traditional wedding gift registry. For those who wish to contribute to our future (together), we may indicate the following IBAN:</p>
 
                             <div class="iban-box">
-                                <p><strong>IBAN:</strong> IT74T0538713120000000138081</p>
-                                <p><strong>Account holder:</strong> Lorenzo Liverani</p>
+                                <p><strong>IBAN</strong> IT74T0538713120000000138081</p>
+                                <p><strong>Account holder</strong> Lorenzo Liverani</p>
                             </div>
                         </div>
                     </div>
@@ -258,7 +258,7 @@
             </div>
             
             <div class="registry-image">
-                <img src="vienna.jpg" alt="Vienna">
+                <img src="vienna.png" alt="Vienna">
             </div>
         </section>
 
@@ -285,6 +285,12 @@
                         p.setAttribute('aria-hidden', 'true');
                     }
                 });
+
+                // Update image based on language
+                const registryImg = document.querySelector('.registry-image img');
+                if (registryImg) {
+                    registryImg.src = lang === 'en' ? 'vienna_eng.png' : 'vienna.png';
+                }
 
                 try { localStorage.setItem('siteLang', lang); } catch (e) { /* ignore */ }
             }
