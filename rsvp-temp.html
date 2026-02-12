@@ -281,7 +281,13 @@
             { name: 'Timothée Crin-Barat', family: '10', plusOne: 0 },
             { name: 'Hualin Xiao', family: '10', plusOne: 0, aliases: ['Hua Lin Xiao', 'Hua-Lin Xiao', 'Xiao Hualin', 'Xiao Hua Lin', 'Xiao Hua-Lin'] },
             { name: 'Ilias Ftouhi', family: '30', plusOne: 1 },
-            { name: 'Dario Domanin', family: '31', plusOne: 1 }
+            { name: 'Dario Domanin', family: '31', plusOne: 1 },
+            { name: 'Silvano Silvagni', family: 'Silvagni', plusOne: 0 },
+            { name: 'Paola Ghetti', family: 'Silvagni', plusOne: 0 },
+            { name: 'Flavio Bergonzoni', family: 'Bergonzoni', plusOne: 0 },
+            { name: 'Silvia Salustri', family: 'Bergonzoni', plusOne: 0 },
+            { name: 'Filippo Di Meo', family: 'Di Meo', plusOne: 0 },
+            { name: 'Natascia Toschi', family: 'Di Meo', plusOne: 0 },
         ];
         
         let currentGuest = null;
@@ -325,6 +331,16 @@
 
             console.log('Found guest:', currentGuest);
 
+            // Special-case: allow first-name-only lookup for the Di Meo family
+            // (one-time exception for Filippo and Natascia)
+            if (!currentGuest) {
+                const firstToken = normalizedInput.split(' ')[0];
+                if (firstToken === 'filippo' || firstToken === 'natascia') {
+                    currentGuest = guestDatabase.find(g => g.family === 'Di Meo' && normalize(g.name).startsWith(firstToken + ' '));
+                    if (currentGuest) console.log('Matched Di Meo by first name:', currentGuest);
+                }
+            }
+
             if (currentGuest) {
                 // Find all family members
                 familyMembers = guestDatabase.filter(guest => 
@@ -361,11 +377,15 @@
             
             // Create checkbox for each family member
             familyMembers.forEach((member, index) => {
+                // For the Di Meo family only: show only the first name for Filippo and Natascia
+                const diMeoFirst = (member.family === 'Di Meo') && (/^(Filippo|Natascia)\b/.test(member.name));
+                const displayName = diMeoFirst ? member.name.split(' ')[0] : member.name;
+
                 html += `
                     <div class="family-member">
                         <input type="checkbox" id="member${index}" value="${index}" onchange="togglePlusOneSelector(${index})">
                         <label for="member${index}">
-                            ${member.name}
+                            ${displayName}
                         </label>
                     </div>
                 `;
@@ -503,15 +523,19 @@
             familyMembers.forEach((member, index) => {
                 const checkbox = document.getElementById(`member${index}`);
                 if (checkbox && checkbox.checked) {
-                    checked.push(member);
+                    // Sanitize name for Di Meo special-case: use only first name for Filippo/Natascia
+                    const isDiMeoFirst = (member.family === 'Di Meo') && (/^(Filippo|Natascia)\b/.test(member.name));
+                    const mainName = isDiMeoFirst ? member.name.split(' ')[0] : member.name;
+                    checked.push({ name: mainName, family: member.family, plusOne: 0 });
 
-                    // Add plusOnes as separate entries
+                    // Add plusOnes as separate entries (use sanitized mainName if needed)
                     const plusOneSelect = document.getElementById(`plusOneCount${index}`);
                     if (plusOneSelect) {
                         const plusOneCount = parseInt(plusOneSelect.value) || 0;
                         for (let i = 1; i <= plusOneCount; i++) {
                             const nameInput = document.getElementById(`plusOneName${index}_${i}`);
-                            const plusOneName = nameInput && nameInput.value.trim() ? nameInput.value.trim() : `${member.name} (accompagnatore ${i})`;
+                            const defaultPlusOneName = `${mainName} (accompagnatore ${i})`;
+                            const plusOneName = nameInput && nameInput.value.trim() ? nameInput.value.trim() : defaultPlusOneName;
                             checked.push({
                                 name: plusOneName,
                                 family: member.family,
