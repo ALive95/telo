@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foto Tavolo - Lorenzo & Teresa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Upright:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Cormorant Upright', serif; line-height: 1.6;
+            background: #fff; color: #000; min-height: 100vh; padding-bottom: 2rem;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.25rem; }
+
+        .wedding-date { font-size: clamp(0.9rem, 2.5vw, 1.6rem); text-align: center; padding-top: 0.5rem; margin-bottom: 1rem; }
+        .site-title { display: block; max-width: 400px; margin: 0 auto; padding-top: 1.5rem; padding-bottom: 0.5rem; width: 100%; height: auto; }
+
+        nav { text-align: center; margin-bottom: 1.25rem; }
+        nav ul { display: flex; justify-content: center; list-style: none; gap: 1rem; flex-wrap: wrap; padding: 0; margin: 0; }
+        nav a {
+            display: inline-block; padding: 0.5rem 1rem; background: #fff; color: #000; text-decoration: none;
+            border-radius: 6px; font-weight: 600; transition: all .25s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.08); font-size: clamp(0.95rem, 2.2vw, 1rem);
+        }
+        nav a:hover { transform: translateY(-1px); background: #000; color: #fff; }
+
+        h2 { font-size: clamp(1.6rem, 5vw, 2.5rem); font-weight: 400; text-align: center; margin: 1rem 0 0.5rem; }
+        .back { display: block; text-align: center; margin-bottom: 1.5rem; color: #000; text-decoration: underline; font-size: 1.1rem; }
+        .status { text-align: center; font-size: 1.2rem; color: #555; margin: 2rem 0; }
+
+        .gallery {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 0.5rem; max-width: 1100px; margin: 0 auto;
+        }
+        .thumb {
+            position: relative; aspect-ratio: 1 / 1; overflow: hidden; cursor: pointer;
+            border-radius: 4px; background: #f2f2f2;
+        }
+        .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .25s ease; }
+        .thumb:hover img { transform: scale(1.05); }
+
+        /* Lightbox */
+        .lb { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 1000; flex-direction: column; align-items: center; justify-content: center; padding: 1rem; }
+        .lb.open { display: flex; }
+        .lb img { max-width: 100%; max-height: 80vh; object-fit: contain; border-radius: 4px; }
+        .lb-actions { margin-top: 1rem; display: flex; gap: 1rem; }
+        .lb-actions a, .lb-actions button {
+            font-family: 'Cormorant Upright', serif; font-size: 1.1rem; font-weight: 600;
+            padding: 0.6rem 1.4rem; border-radius: 6px; cursor: pointer; border: none; text-decoration: none;
+        }
+        .lb-download { background: #fff; color: #000; }
+        .lb-close { background: transparent; color: #fff; border: 1px solid #fff; }
+        .lb-nav { position: absolute; top: 50%; transform: translateY(-50%); background: none; border: none; color: #fff; font-size: 3rem; cursor: pointer; padding: 0 1rem; user-select: none; }
+        .lb-prev { left: 0.5rem; } .lb-next { right: 0.5rem; }
+    </style>
+</head>
+<body>
+    <script>
+        if (!sessionStorage.getItem('authenticated')) {
+            window.location.href = 'login.html';
+        }
+    </script>
+
+    <div class="container">
+        <img src="fiori_home.svg" alt="Lorenzo & Teresa" class="site-title">
+        <p class="wedding-date">30 Maggio 2026 - Ravenna</p>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="wedding-day.html">Programma</a></li>
+                <li><a href="concorso.html">Concorso fotografico!</a></li>
+            </ul>
+        </nav>
+
+        <h2 id="title">Tavolo</h2>
+        <a class="back" href="concorso.html">&larr; Torna ai tavoli</a>
+
+        <div class="status" id="status">Caricamento foto...</div>
+        <div class="gallery" id="gallery"></div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lb" id="lb">
+        <button class="lb-nav lb-prev" onclick="step(-1)">&#8249;</button>
+        <button class="lb-nav lb-next" onclick="step(1)">&#8250;</button>
+        <img id="lbImg" src="" alt="">
+        <div class="lb-actions">
+            <a class="lb-download" id="lbDownload" href="" download>Scarica originale</a>
+            <button class="lb-close" onclick="closeLb()">Chiudi</button>
+        </div>
+    </div>
+
+    <script>
+        // ===== CONFIG =====
+        const CLOUD_NAME = 'dschlmu1o'; // <-- il tuo cloud name Cloudinary
+        // ==================
+
+        // Titoli speciali (le voci non-tavolo). Tutto il resto diventa "Tavolo N".
+        const eventTitles = { 9: 'Pomeriggio in via Zalamella' };
+
+        const params = new URLSearchParams(location.search);
+        const n = parseInt(params.get('n'), 10);
+        const tag = 'tavolo' + n;
+
+        const statusEl = document.getElementById('status');
+        const galleryEl = document.getElementById('gallery');
+        const heading = eventTitles[n] || ('Tavolo ' + (n || ''));
+        document.getElementById('title').textContent = heading;
+        document.title = heading + ' - Lorenzo & Teresa';
+
+        const base = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload`;
+        const thumbUrl = id => `${base}/c_fill,w_400,h_400,q_auto,f_auto/${id}`;
+        const fullUrl  = id => `${base}/q_auto,f_auto,w_1800/${id}`;
+        const dlUrl    = id => `${base}/fl_attachment/${id}`;
+
+        let photos = [];   // array of public_id
+        let current = 0;
+
+        if (!n || n < 1 || n > 9) {
+            statusEl.textContent = 'Tavolo non valido.';
+        } else {
+            fetch(`https://res.cloudinary.com/${CLOUD_NAME}/image/list/${tag}.json`)
+                .then(r => { if (!r.ok) throw new Error('list'); return r.json(); })
+                .then(data => {
+                    photos = (data.resources || []).map(res => res.public_id + '.' + res.format);
+                    if (photos.length === 0) {
+                        statusEl.textContent = 'Foto in arrivo.';
+                        return;
+                    }
+                    statusEl.style.display = 'none';
+                    render();
+                })
+                .catch(err => { statusEl.textContent = 'Errore: ' + err; });
+        }
+
+        function render() {
+            galleryEl.innerHTML = photos.map((id, i) =>
+                `<div class="thumb" onclick="openLb(${i})"><img loading="lazy" src="${thumbUrl(id)}" alt="Foto ${i+1}"></div>`
+            ).join('');
+        }
+
+        function openLb(i) {
+            current = i;
+            document.getElementById('lbImg').src = fullUrl(photos[i]);
+            document.getElementById('lbDownload').href = dlUrl(photos[i]);
+            document.getElementById('lb').classList.add('open');
+        }
+        function closeLb() { document.getElementById('lb').classList.remove('open'); }
+        function step(d) {
+            current = (current + d + photos.length) % photos.length;
+            openLb(current);
+        }
+        document.getElementById('lb').addEventListener('click', e => { if (e.target.id === 'lb') closeLb(); });
+        document.addEventListener('keydown', e => {
+            if (!document.getElementById('lb').classList.contains('open')) return;
+            if (e.key === 'Escape') closeLb();
+            if (e.key === 'ArrowLeft') step(-1);
+            if (e.key === 'ArrowRight') step(1);
+        });
+    </script>
+</body>
+</html>

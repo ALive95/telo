@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concorso fotografico - Lorenzo & Teresa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Upright:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Cormorant Upright', serif;
+            line-height: 1.6;
+            background: #ffffff;
+            color: #000000;
+            min-height: 100vh;
+            padding-bottom: 2rem;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.25rem; }
+
+        .wedding-date {
+            font-size: clamp(0.9rem, 2.5vw, 1.6rem);
+            font-weight: 400; color: #000; text-align: center;
+            padding-top: 0.5rem; margin-bottom: 1rem;
+        }
+
+        .site-title {
+            display: block; max-width: 400px; height: auto; margin: 0 auto;
+            padding-top: 1.5rem; padding-bottom: 0.5rem; width: 100%;
+        }
+
+        nav { text-align: center; margin-bottom: 1.25rem; }
+        nav ul { display: flex; justify-content: center; list-style: none; gap: 1rem; flex-wrap: wrap; padding: 0; margin: 0; }
+        nav a {
+            display: inline-block; padding: 0.5rem 1rem; background: #fff; color: #000;
+            text-decoration: none; border-radius: 6px; font-weight: 600; transition: all .25s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.08);
+            font-size: clamp(0.95rem, 2.2vw, 1rem);
+        }
+        nav a:hover { transform: translateY(-1px); background: #000; color: #fff; }
+
+        h2 {
+            font-size: clamp(1.6rem, 5vw, 2.5rem); font-weight: 400; color: #000;
+            text-align: center; margin: 1rem 0 0.5rem;
+        }
+
+        .intro { text-align: center; font-size: clamp(1rem, 3vw, 1.3rem); color: #151515; max-width: 700px; margin: 0 auto 1.5rem; }
+
+        /* ---- Visual tile (shared) ---- */
+        .card {
+            position: relative; display: block; text-decoration: none; color: #000;
+            border: 1px solid rgba(0,0,0,0.08); border-radius: 8px; overflow: hidden;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06); background: #fff; cursor: pointer;
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+        .card-img { position: relative; width: 100%; aspect-ratio: 1 / 1; overflow: hidden; }
+        .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .card-label {
+            position: absolute; bottom: 0; left: 0; right: 0; text-align: center;
+            font-size: clamp(1rem, 2.4vw, 1.4rem); font-weight: 600; padding: 0.35rem;
+            color: #000; background: rgba(255,255,255,0.85);
+        }
+
+        /* Guest list data (hidden on desktop; used to fill the center panel) */
+        .members { display: none; }
+
+        /* ---- Circle layout ---- */
+        .circle {
+            position: relative; width: min(92vw, 560px); aspect-ratio: 1 / 1;
+            margin: 0.5rem auto 0;
+        }
+        .circle-center {
+            position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+            width: 22%; height: auto; opacity: 0.55; pointer-events: none;
+            transition: opacity .2s ease;
+        }
+
+        /* Center popup with the hovered table's guest list */
+        .center-panel {
+            position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+            width: min(72%, 280px); max-height: 84%; overflow: auto;
+            background: #fff; border: 1px solid rgba(0,0,0,0.1); border-radius: 12px;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.16); padding: 1rem 1.25rem;
+            display: none; z-index: 20; pointer-events: none;
+        }
+        .center-panel.show { display: block; }
+        .center-panel ul { list-style: none; text-align: center; }
+        .center-panel li { font-size: clamp(0.95rem, 2vw, 1.1rem); line-height: 1.55; }
+        .center-panel .members-title { font-weight: 700; margin-bottom: 0.4rem; font-size: 1.2rem; }
+
+        .node {
+            position: absolute; width: clamp(92px, 24%, 140px);
+            transform: translate(-50%, -50%);
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+        .node:hover { transform: translate(-50%, -50%) scale(1.06); z-index: 5; box-shadow: 0 12px 28px rgba(0,0,0,0.18); }
+
+        .pos-1 { left: 50%; top: 12%; }
+        .pos-2 { left: 77%; top: 23%; }
+        .pos-3 { left: 88%; top: 50%; }
+        .pos-4 { left: 77%; top: 77%; }
+        .pos-5 { left: 50%; top: 88%; }
+        .pos-6 { left: 23%; top: 77%; }
+        .pos-7 { left: 12%; top: 50%; }
+        .pos-8 { left: 23%; top: 23%; }
+
+        /* ---- Extras row (below the circle) ---- */
+        .extras {
+            display: flex; justify-content: center; flex-wrap: wrap; gap: 1.25rem;
+            max-width: 560px; margin: 2rem auto 0;
+        }
+        .extras .card { width: 190px; }
+        .extras .card:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,0.12); }
+
+        /* Paper / regolamento tile */
+        .paper {
+            display: flex; align-items: center; justify-content: center; text-align: center;
+            aspect-ratio: 1 / 1; padding: 1rem;
+            background:
+                repeating-linear-gradient(transparent, transparent 22px, rgba(0,0,0,0.06) 23px),
+                #fffef8;
+            border: 1px solid rgba(0,0,0,0.12);
+        }
+        .paper .paper-title { font-size: clamp(1.2rem, 3vw, 1.6rem); font-weight: 600; }
+        .paper .paper-sub { display: block; font-size: 0.95rem; color: #555; margin-top: 0.3rem; }
+
+        /* ---- Narrow screens: drop the circle, use a simple grid + name captions ---- */
+        @media (max-width: 600px) {
+            .circle {
+                position: static; width: 100%; aspect-ratio: auto;
+                display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+            }
+            .circle-center, .center-panel { display: none !important; }
+            .node { position: static; transform: none; width: auto; }
+            .node:hover { transform: none; }
+            .members {
+                display: block; background: #fff;
+                border-top: 1px solid rgba(0,0,0,0.08); padding: 0.75rem;
+            }
+            .members ul { list-style: none; text-align: center; }
+            .members li { font-size: 1rem; line-height: 1.5; }
+            .members .members-title { font-weight: 700; margin-bottom: 0.3rem; }
+            .extras { gap: 1rem; }
+            .extras .card { width: calc(50% - 0.5rem); }
+        }
+
+        /* ---- Modal ---- */
+        .modal-overlay {
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+            align-items: center; justify-content: center; padding: 1rem; z-index: 1000;
+        }
+        .modal-overlay.open { display: flex; }
+        .modal {
+            background: #fffef8; max-width: 600px; width: 100%; border-radius: 8px;
+            padding: 2rem; max-height: 85vh; overflow-y: auto; position: relative;
+        }
+        .modal h3 { font-weight: 600; font-size: 1.8rem; margin-bottom: 1rem; text-align: center; }
+        .modal p { font-size: 1.15rem; margin-bottom: 1rem; }
+        .modal-close {
+            position: absolute; top: 0.5rem; right: 0.75rem; background: none; border: none;
+            font-size: 2rem; cursor: pointer; line-height: 1; color: #000;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        if (!sessionStorage.getItem('authenticated')) {
+            window.location.href = 'login.html';
+        }
+    </script>
+
+    <div class="container">
+        <img src="fiori_home.svg" alt="Lorenzo & Teresa" class="site-title">
+        <p class="wedding-date">30 Maggio 2026 - Ravenna</p>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="wedding-day.html">Programma</a></li>
+                <li><a href="concorso.html">Concorso fotografico!</a></li>
+            </ul>
+        </nav>
+
+        <h2>Concorso fotografico!</h2>
+        <p class="intro">Passa il mouse su un tavolo per vedere chi vi era seduto, e cliccalo per aprire le foto.</p>
+
+        <div class="circle">
+            <img class="circle-center" src="fiori.png" alt="" aria-hidden="true">
+            <div class="center-panel" id="centerPanel"></div>
+
+            <a class="card node pos-1" href="tavolo.html?n=1">
+                <div class="card-img"><img src="tavoli/1.png" alt="Tavolo 1"></div>
+                <div class="members"><ul>
+                    <li class="members-title">Tavolo 1</li>
+                    <li>Lorenzo Liverani</li><li>Teresa Berardi</li><li>Elena Liverani</li><li>Maria Berardi</li><li>Pietro Nardiello</li><li>Matthew Weaver</li><li>Giovanni Liverani</li><li>Amelia Weaver</li><li>Giorgia Cherubini</li><li>Tommaso Berardi</li>
+                </ul></div>
+            </a>
+
+            <a class="card node pos-2" href="tavolo.html?n=2">
+                <div class="card-img"><img src="tavoli/2.png" alt="Tavolo 2"></div>
+                <div class="members"><ul>
+                    <li class="members-title">Tavolo 2</li>
+                    <li>Cecilia Marcucci</li><li>Andrea Berardi</li><li>Lidia Spadoni</li><li>Virgilio Ricci</li><li>Fiorella Bacchilega</li><li>Gianna Scardovi</li>
+                </ul></div>
+            </a>
+
+            <a class="card node pos-3" href="tavolo.html?n=3">
+                <div class="card-img"><img src="tavoli/3.png" alt="Tavolo 3"></div>
+                <div class="members"><ul>
+                    <li class="members-title">Tavolo 3</li>
+                    <li>Stefania Ciarlantini</li><li>Alfredo Liverani</li><li>Maria Giovanna Giuntoli</li><li>Barbara Friolo</li><li>Enrico Liverani</li><li>Silvia Piccinini</li><li>Luigi Ciarlantini</li><li>Laura Storati</li><li>Alberto Tommasini</li><li>Licia Piraccini</li>
+                </ul></div>
+            </a>
+
+            <a class="card node pos-4" href="tavolo.html?n=4">
+                <div class="card-img"><img src="tavoli/4.png" alt="Tavolo 4"></div>
+                <div class="members"><ul>
+                    <li class="members-title">Tavolo 4</li>
+                    <li>Cristina Marcucci</li><li>Francesco Aronna</li><li>Silvia Berardi</li><li>Luca Pezzi</li><li>Ugo Ceroni</li><li>Antonella Allegra</li><li>Silvia Salustri</li><li>Flavio Bergonzoni</li>
+                </ul></div>
+            </a>
+
+            <a class="card node pos-5" href="tavolo.html?n=5">
+                <div class="card-img"><img src="tavoli/5.png" alt="Tavolo 5"></div>
+                <div class="members"><ul>
+                    <li class="members-title">Tavolo 5</li>
+                    <li>Carlo Bolognesi</li><li>Barbara Ferretti</li><li>Carlo Bertondini</li><li>Claudio Rigotti</li><li>Elisabetta Agostini</li><li>Davide Venturi</li><li>Laura Bolognesi</li><li>Roberta Colombo</li><li>Roberto Zanoni</li>
+                </ul></div>
+            </a>
+
+            <a class="card node pos-6" href="tavolo.html?n=6">
+                <div class="card-img"><img src="tavoli/6.png" alt="Tavolo 6"></div>
+                <div class="members"><ul>
+                    <li class="members-title">Tavolo 6</li>
+                    <li>Silvia Lama</li><li>Laura Rigotti</li><li>Mattia Dattolo</li><li>Claudio Venturi</li><li>Xhenifer Guza</li><li>Celine Belli</li><li>Francesco Belli</li><li>Paolo Trilli</li><li>Carlo Franco Bolognesi</li><li>Giovanni Ardenghi</li><li>Chiara Lelli</li>
+                </ul></div>
+            </a>
+
+            <a class="card node pos-7" href="tavolo.html?n=7">
+                <div class="card-img"><img src="tavoli/7.png" alt="Tavolo 7"></div>
+                <div class="members"><ul>
+                    <li class="members-title">Tavolo 7</li>
+                    <li>Francesca Asturi</li><li>Gianmarco Bilotti</li><li>Giulio Venturi</li><li>Francesco Pezzi</li><li>Davide Pezzi</li><li>Dario Domanin</li><li>Lorena Corazza</li><li>Gilda Matteucci</li><li>Alessandro Capelli</li><li>Livia Rigotti</li><li>Anna Rigotti</li>
+                </ul></div>
+            </a>
+
+            <a class="card node pos-8" href="tavolo.html?n=8">
+                <div class="card-img"><img src="tavoli/8.png" alt="Tavolo 8"></div>
+                <div class="members"><ul>
+                    <li class="members-title">Tavolo 8</li>
+                    <li>Christian Esposito</li><li>Lorenzo Maugeri</li><li>Alessandro Mazzotti</li><li>Anna Ciarlantini</li><li>Enrico Manuzzi</li><li>Fabio Mercurio</li><li>Maria Bedran</li>
+                </ul></div>
+            </a>
+        </div>
+
+        <div class="extras">
+            <a class="card" href="tavolo.html?n=9">
+                <div class="card-img"><img src="tavoli/9.png" alt="Pomeriggio in via Zalamella"><span class="card-label">Pomeriggio in via Zalamella</span></div>
+            </a>
+
+            <div class="card paper" onclick="document.getElementById('rulesModal').classList.add('open')">
+                <div>
+                    <span class="paper-title">Regolamento</span>
+                    <span class="paper-sub">Clicca per leggere</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Regolamento modal -->
+    <div class="modal-overlay" id="rulesModal" onclick="if(event.target===this)this.classList.remove('open')">
+        <div class="modal">
+            <button class="modal-close" onclick="document.getElementById('rulesModal').classList.remove('open')">&times;</button>
+            <h3>Regolamento</h3>
+            <div id="rulesContent"><p style="text-align:center;color:#888;">Caricamento...</p></div>
+        </div>
+    </div>
+
+    <script>
+        // Hover su un tavolo: mostra la lista al centro del cerchio
+        (function () {
+            const panel = document.getElementById('centerPanel');
+            const flower = document.querySelector('.circle-center');
+            document.querySelectorAll('.node').forEach(node => {
+                const members = node.querySelector('.members');
+                if (!members) return;
+                node.addEventListener('mouseenter', () => {
+                    panel.innerHTML = members.innerHTML;
+                    panel.classList.add('show');
+                    if (flower) flower.style.opacity = '0';
+                });
+                node.addEventListener('mouseleave', () => {
+                    panel.classList.remove('show');
+                    if (flower) flower.style.opacity = '';
+                });
+            });
+        })();
+
+        // Carica le immagini del regolamento (taggate "regolamento" su Cloudinary)
+        (function () {
+            const CLOUD = 'dschlmu1o';
+            const el = document.getElementById('rulesContent');
+            fetch(`https://res.cloudinary.com/${CLOUD}/image/list/regolamento.json`)
+                .then(r => r.ok ? r.json() : Promise.reject())
+                .then(data => {
+                    const ids = (data.resources || []).map(res => res.public_id + '.' + res.format);
+                    if (!ids.length) { el.innerHTML = '<p style="text-align:center;color:#888;">Regolamento in arrivo.</p>'; return; }
+                    el.innerHTML = ids.map(id =>
+                        `<a href="https://res.cloudinary.com/${CLOUD}/image/upload/${id}" target="_blank" rel="noopener">
+                            <img src="https://res.cloudinary.com/${CLOUD}/image/upload/q_auto,f_auto,w_1200/${id}" alt="Regolamento" style="width:100%;height:auto;border-radius:6px;margin-bottom:1rem;display:block;">
+                         </a>`
+                    ).join('');
+                })
+                .catch(() => { el.innerHTML = '<p style="text-align:center;color:#888;">Regolamento in arrivo.</p>'; });
+        })();
+    </script>
+</body>
+</html>
