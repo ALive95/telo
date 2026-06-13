@@ -147,6 +147,17 @@
             .extras .card { width: calc(50% - 0.5rem); }
         }
 
+        /* ---- Download all ---- */
+        .download-all { text-align: center; margin: 2rem auto 0; }
+        .dl-all {
+            display: inline-block; text-decoration: none;
+            font-family: 'Cormorant Upright', serif; font-size: 1.2rem; font-weight: 600;
+            padding: 0.8rem 1.8rem; background: #000; color: #fff; border: none;
+            border-radius: 6px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform .25s ease, background .25s ease;
+        }
+        .dl-all:hover { transform: translateY(-2px); background: #333; }
+
         /* ---- Modal ---- */
         .modal-overlay {
             display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6);
@@ -266,6 +277,10 @@
                     <span class="paper-sub">Clicca per leggere</span>
                 </div>
             </div>
+        </div>
+
+        <div class="download-all">
+            <a class="dl-all" href="https://drive.google.com/file/d/1fkUN8A4Y5M3cKjbvM1Q2BfusSnSMXrXg/view?usp=sharing" target="_blank" rel="noopener">Scarica tutte</a>
         </div>
     </div>
 
